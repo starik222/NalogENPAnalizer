@@ -32,6 +32,9 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             toolStrip1 = new ToolStrip();
             toolStripButton1 = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            toolStripButton2 = new ToolStripButton();
+            toolStripButton3 = new ToolStripButton();
             dataGridView1 = new DataGridView();
             opIncoming = new DataGridViewCheckBoxColumn();
             opPereplata = new DataGridViewCheckBoxColumn();
@@ -52,7 +55,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripSeparator1, toolStripButton2, toolStripButton3 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 25);
@@ -68,6 +71,31 @@
             toolStripButton1.Size = new Size(23, 22);
             toolStripButton1.Text = "Сохранить";
             toolStripButton1.Click += toolStripButton1_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 25);
+            // 
+            // toolStripButton2
+            // 
+            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton2.Image = Properties.Resources.AddToFiltered;
+            toolStripButton2.ImageTransparentColor = Color.Magenta;
+            toolStripButton2.Name = "toolStripButton2";
+            toolStripButton2.Size = new Size(23, 22);
+            toolStripButton2.Text = "Установить фильтр";
+            toolStripButton2.Click += toolStripButton2_Click;
+            // 
+            // toolStripButton3
+            // 
+            toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton3.Image = Properties.Resources.DelFromFiltered;
+            toolStripButton3.ImageTransparentColor = Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new Size(23, 22);
+            toolStripButton3.Text = "Сбросить фильтр";
+            toolStripButton3.Click += toolStripButton3_Click;
             // 
             // dataGridView1
             // 
@@ -180,6 +208,7 @@
             Name = "Form_op_editor";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Редактор данных";
+            WindowState = FormWindowState.Maximized;
             Load += Form_op_editor_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -207,5 +236,8 @@
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel toolStripStatusLabel1;
         private ToolStripStatusLabel LabelSumma;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton toolStripButton2;
+        private ToolStripButton toolStripButton3;
     }
 }

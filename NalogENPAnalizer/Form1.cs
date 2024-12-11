@@ -21,6 +21,8 @@ namespace NalogENPAnalizer
                 return;
             EnpXmlReaderToDb reader = new EnpXmlReaderToDb();
             reader.ReadXmlToDb(openFileDialog.FileName);
+            fFilter.Close();
+            fFilter = new Form_filter();
         }
 
         private void Í¡ ToolStripMenuItem_Click(object sender, EventArgs e)

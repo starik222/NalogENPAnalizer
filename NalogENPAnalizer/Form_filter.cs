@@ -23,8 +23,11 @@ namespace NalogENPAnalizer
             BindTableToCB<KppData>(comboBoxKpp);
             BindTableToCB<OktmoData>(comboBoxOktmo);
             BindTableToCB<PokazatelData>(comboBoxPokazatel);
-            dateTimePickerStart.Value = Program.MainDb.Operations.Min(a => a.OperationDate);
-            dateTimePickerEnd.Value = Program.MainDb.Operations.Max(a => a.OperationDate);
+            if (Program.MainDb.Operations.Count() > 0)
+            {
+                dateTimePickerStart.Value = Program.MainDb.Operations.Min(a => a.OperationDate);
+                dateTimePickerEnd.Value = Program.MainDb.Operations.Max(a => a.OperationDate);
+            }
         }
 
         public FilterData GetFilterData()

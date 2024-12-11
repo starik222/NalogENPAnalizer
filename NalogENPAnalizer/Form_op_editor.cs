@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BitmagnetUI;
+using Microsoft.EntityFrameworkCore;
 using NalogENPAnalizer.DataModels;
 using System;
 using System.Collections.Generic;
@@ -18,20 +19,29 @@ namespace NalogENPAnalizer
         {
             InitializeComponent();
             dataGridView1.AutoGenerateColumns = false;
+            fFilter = new Form_filter();
         }
-
+        private BindingSource bs;
+        private Form_filter fFilter;
         private void Form_op_editor_Load(object sender, EventArgs e)
         {
             Program.MainDb.Operations.Load();
-            BindingSource bs = new BindingSource();
+            bs = new BindingSource();
             bs.DataSource = Program.MainDb.Operations.Local.ToBindingList();
             bs.Sort = "OperationDate";
             dataGridView1.DataSource = bs;
             BindTableToCB<DocOsnData>("opDocOsn", "Name", "Id");
-            BindTableToCB<KbkData>("opKbk", "KodKbk", "Id");
             BindTableToCB<KppData>("opKpp", "Kpp", "Id");
             BindTableToCB<OktmoData>("opOktmo", "Oktmo", "Id");
             BindTableToCB<PokazatelData>("opPokazatel", "Name", "Id");
+            //BindTableToCB<KbkData>("opKbk", "KodKbk", "Id");
+
+            var cb = ((DataGridViewComboBoxColumn)dataGridView1.Columns["opKbk"]);
+            var nKbk = Program.MainDb.Kbk.Select(a => new { Id = a.Id, Name = (a.Name == "" ? a.KodKbk : a.Name) }).ToList();
+            cb.DataSource = nKbk;
+            cb.DisplayMember = "Name";
+            cb.ValueMember = "Id";
+
             dataGridView1.Refresh();
         }
 
@@ -59,6 +69,37 @@ namespace NalogENPAnalizer
                 }
             }
             LabelSumma.Text = res.ToString("N2");
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            if (fFilter.ShowDialog() != DialogResult.OK)
+                return;
+            FilterData fd = fFilter.GetFilterData();
+            IQueryable<OperationData> op = Program.MainDb.Operations;
+            var predicate = PredicateBuilder.True<OperationData>();
+            predicate = predicate.AND(a => a.OperationDate >= fd.Start);
+            predicate = predicate.AND(a => a.OperationDate <= fd.End);
+            if (fd.DocOsn != null)
+                predicate = predicate.AND(a => a.DocOsnId == fd.DocOsn);
+            if (fd.Kbk != null)
+                predicate = predicate.AND(a => a.KbkId == fd.Kbk);
+            if (fd.Kpp != null)
+                predicate = predicate.AND(a => a.KppId == fd.Kpp);
+            if (fd.Oktmo != null)
+                predicate = predicate.AND(a => a.OktmoId == fd.Oktmo);
+            if (fd.Pokazatel != null)
+                predicate = predicate.AND(a => a.PokazatelId == fd.Pokazatel);
+            op = op.Where(predicate);
+            op = op.OrderBy(a => a.OperationDate);
+            bs.DataSource = op.ToList();
+            toolStripButton1.Enabled = false;
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            bs.DataSource = Program.MainDb.Operations.Local.ToBindingList();
+            toolStripButton1.Enabled = true;
         }
     }
 }

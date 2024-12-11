@@ -33,10 +33,10 @@
             открытьToolStripMenuItem = new ToolStripMenuItem();
             справочникиToolStripMenuItem = new ToolStripMenuItem();
             кБКToolStripMenuItem = new ToolStripMenuItem();
+            редакторЗагруженныхДанныхToolStripMenuItem = new ToolStripMenuItem();
             операцииToolStripMenuItem = new ToolStripMenuItem();
             суммированиеДанныхToolStripMenuItem = new ToolStripMenuItem();
             dataGridView1 = new DataGridView();
-            редакторЗагруженныхДанныхToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -60,7 +60,7 @@
             // открытьToolStripMenuItem
             // 
             открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            открытьToolStripMenuItem.Size = new Size(130, 22);
+            открытьToolStripMenuItem.Size = new Size(180, 22);
             открытьToolStripMenuItem.Text = "Открыть...";
             открытьToolStripMenuItem.Click += открытьToolStripMenuItem_Click;
             // 
@@ -77,6 +77,13 @@
             кБКToolStripMenuItem.Size = new Size(244, 22);
             кБКToolStripMenuItem.Text = "КБК";
             кБКToolStripMenuItem.Click += кБКToolStripMenuItem_Click;
+            // 
+            // редакторЗагруженныхДанныхToolStripMenuItem
+            // 
+            редакторЗагруженныхДанныхToolStripMenuItem.Name = "редакторЗагруженныхДанныхToolStripMenuItem";
+            редакторЗагруженныхДанныхToolStripMenuItem.Size = new Size(244, 22);
+            редакторЗагруженныхДанныхToolStripMenuItem.Text = "Редактор загруженных данных";
+            редакторЗагруженныхДанныхToolStripMenuItem.Click += редакторЗагруженныхДанныхToolStripMenuItem_Click;
             // 
             // операцииToolStripMenuItem
             // 
@@ -104,13 +111,6 @@
             dataGridView1.Size = new Size(800, 426);
             dataGridView1.TabIndex = 1;
             // 
-            // редакторЗагруженныхДанныхToolStripMenuItem
-            // 
-            редакторЗагруженныхДанныхToolStripMenuItem.Name = "редакторЗагруженныхДанныхToolStripMenuItem";
-            редакторЗагруженныхДанныхToolStripMenuItem.Size = new Size(244, 22);
-            редакторЗагруженныхДанныхToolStripMenuItem.Text = "Редактор загруженных данных";
-            редакторЗагруженныхДанныхToolStripMenuItem.Click += редакторЗагруженныхДанныхToolStripMenuItem_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -120,6 +120,7 @@
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
