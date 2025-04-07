@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+	<PublishSingleFile>true</PublishSingleFile>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,5 +28,17 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <Target Name="MoveNativeDllsToSubDirectory" AfterTargets="Publish">
+    <PropertyGroup>
+      <NativeDllSubDir>$(RuntimeIdentifier)</NativeDllSubDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <NativeDllsToMove Include="$(PublishDir)*.dll" />
+    </ItemGroup>
+    <Move SourceFiles="@(NativeDllsToMove)" 
+          DestinationFolder="$(PublishDir)\$(NativeDllSubDir)\" />
+    <Message Text="Moved native dlls to sub-directory '$(NativeDllSubDir)'" 
+             Importance="high" />
+  </Target>
 
 </Project>

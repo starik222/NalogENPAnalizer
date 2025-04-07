@@ -107,7 +107,11 @@ namespace NalogENPAnalizer
             }
             string tKbk = node.Attributes["КБК"].InnerText;
             string tOktmo = node.Attributes["ОКТМО"].InnerText;
-            string tKpp = node.Attributes["КПП"].InnerText;
+            string tKpp = "000000000";
+            if (node.Attributes["КПП"] != null)
+            {
+                tKpp = node.Attributes["КПП"].InnerText;
+            }
             string docOsn = node.Attributes["ДокОснов"].InnerText;
 
             OperationData op = new OperationData();
